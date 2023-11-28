@@ -93,7 +93,7 @@ export const MegaMenu = ({
           {collections &&
             collections.map(collection => (
               <div
-                key={collection.id}
+                key={Number(collection.id)}
                 className="ml-4 w-full max-w-[150px] py-8"
               >
                 <Link
@@ -107,7 +107,7 @@ export const MegaMenu = ({
                   {collection.children
                     .filter(subCollection => subCollection.types.includes(type))
                     .map(subCollection => (
-                      <li key={subCollection.id}>
+                      <li key={Number(subCollection.id)}>
                         <Link
                           href={`/products/${typeInLowerCase}/${subCollection.slug}`}
                           className="mb-1.5 text-xs font-normal text-neutral-700 hover:underline"
@@ -154,3 +154,4 @@ export const MegaMenu = ({
     </div>
   );
 };
+

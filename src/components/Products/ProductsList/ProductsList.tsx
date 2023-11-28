@@ -15,10 +15,11 @@ export const ProductsList = ({ products, isLoading }: Props) => {
           .map((_, index) => <Skeleton key={index} />)}
       {products &&
         products.map(product => (
-          <div key={product.id}>
+          <div key={Number(product.id)}>
             <ProductItem {...product} />
           </div>
         ))}
     </div>
   );
 };
+
