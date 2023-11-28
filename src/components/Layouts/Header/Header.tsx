@@ -54,7 +54,7 @@ export const Header = ({ collections }: { collections: Collections }) => {
       <div className="relative h-14 bg-white shadow-md shadow-gray-200">
         <div className="mx-auto flex h-full items-center px-4 xl:container">
           <div className="mr-5 flex shrink-0 items-center">
-            <Link href="/">
+            <Link href="/" className="flex items-center gap-2">
               <Image
                 priority
                 src="/ic-modishop.png"
@@ -62,6 +62,7 @@ export const Header = ({ collections }: { collections: Collections }) => {
                 width={35}
                 height={35}
               />
+              <span className="text-xl font-semibold">Modishop</span>
             </Link>
           </div>
           <ul className="ml-auto hidden h-full md:flex">

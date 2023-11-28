@@ -54,7 +54,7 @@ export const Footer = () => {
       <div className="mx-auto max-w-7xl px-4 py-10">
         <div className="flex flex-col md:flex-row">
           <div className="flex flex-col md:flex-1">
-            <Link href="/">
+            <Link href="/" className="flex items-center gap-2">
               <Image
                 priority
                 src="/ic-modishop.png"
@@ -63,6 +63,7 @@ export const Footer = () => {
                 height={35}
                 quality={100}
               />
+              <span className="text-5xl font-bold">Modishop</span>
             </Link>
             <p className="py-4 text-sm font-normal text-neutral-500">
               {t('modishop')}
