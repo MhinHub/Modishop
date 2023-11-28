@@ -3,28 +3,28 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "cockroachdb"
   url      = env("DATABASE_URL")
 }
 
 model Collection {
-  id        Int              @id @default(autoincrement())
+  id        BigInt           @id @default(sequence())
   createdAt DateTime         @default(now())
   updatedAt DateTime         @updatedAt
-  name      String           @db.VarChar(255)
+  name      String
   slug      String           @unique
   types     CollectionType[]
-  parentId  Int?
+  parentId  BigInt?
   parent    Collection?      @relation(name: "ParentChild", fields: [parentId], references: [id])
   children  Collection[]     @relation(name: "ParentChild")
   products  Product[]
 }
 
 model Product {
-  id           Int              @id @default(autoincrement())
+  id           BigInt           @id @default(sequence())
   createdAt    DateTime         @default(now())
   updatedAt    DateTime         @updatedAt
-  name         String           @db.VarChar(255)
+  name         String
   description  String
   price        Float
   rate         Float
@@ -34,15 +34,15 @@ model Product {
   sizes        ProductSize[]
   types        CollectionType[]
   collection   Collection       @relation(fields: [collectionId], references: [id])
-  collectionId Int
+  collectionId BigInt
 }
 
 model ProductImage {
-  id        Int      @id @default(autoincrement())
+  id        BigInt   @id @default(sequence())
   imageURL  String
   imageBlur String
   Product   Product? @relation(fields: [productId], references: [id])
-  productId Int?
+  productId BigInt?
 }
 
 model Account {
@@ -51,15 +51,15 @@ model Account {
   type                     String
   provider                 String
   providerAccountId        String
-  refresh_token            String? @db.Text
-  access_token             String? @db.Text
-  oauth_token              String? @db.Text // Twitter
-  oauth_token_secret       String? @db.Text // Twitter
+  refresh_token            String?
+  access_token             String?
+  oauth_token              String? // Twitter
+  oauth_token_secret       String? // Twitter
   expires_at               Int?
   refresh_token_expires_in Int? // Github
   token_type               String?
   scope                    String?
-  id_token                 String? @db.Text
+  id_token                 String?
   session_state            String?
   user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
