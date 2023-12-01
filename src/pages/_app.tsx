@@ -22,11 +22,11 @@ export type NextPageWithLayout<P = unknown> = NextPage<P> & {
 };
 
 type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
+  Component?: NextPageWithLayout;
 };
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? (page => page);
+function MyApp({ Component, pageProps }: AppPropsWithLayout | any) {
+  const getLayout = Component.getLayout ?? ((page: any) => page);
 
   NProgress.configure({
     showSpinner: false,
