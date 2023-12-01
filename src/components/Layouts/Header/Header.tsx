@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { Transition } from '@headlessui/react';
 import { IconType } from 'react-icons';
@@ -14,6 +15,7 @@ import { BottomNavigation } from 'components/Layouts/BottomNavigation/BottomNavi
 import { useSession, signOut } from 'next-auth/react';
 import { IoMdArrowDropright } from 'react-icons/io';
 import clsx from 'clsx';
+import path from 'path';
 const AnnouncementBar = dynamic(() => import('./AnnouncementBar'), {
   ssr: false,
 });
@@ -48,6 +50,8 @@ export const Header = ({
 }) => {
   const { t } = useTranslation('header');
 
+  const router = useRouter();
+
   const { data: session } = useSession();
 
   const [hoveredNavLink, setHoveredNavLink] = useState<NavLink | null>();
@@ -76,9 +80,10 @@ export const Header = ({
           <ul className="ml-auto hidden h-full md:flex">
             {navLinks.map((item, index) => (
               <li
-                className={`flex items-center font-medium text-neutral-700 transition-colors ${
+                className={clsx(
+                  `flex items-center font-medium text-neutral-700 transition-colors`,
                   hoveredNavLink === item && ' bg-violet-100 text-violet-700'
-                }`}
+                )}
                 key={index}
                 onMouseEnter={() => handleShowMenu(item)}
                 onMouseLeave={handleCloseMenu}
