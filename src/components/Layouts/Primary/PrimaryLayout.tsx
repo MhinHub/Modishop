@@ -21,7 +21,7 @@ export const PrimaryLayout = ({
   url = 'https://modishop.vercel.app',
   image,
 }: PrimaryLayoutProps) => {
-  const { data } = api.collection.all.useQuery();
+  const { data, isLoading } = api.collection.all.useQuery();
 
   return (
     <>
@@ -47,7 +47,7 @@ export const PrimaryLayout = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="min-h-screen">
-        <Header collections={data} />
+        <Header collections={data} isLoading={isLoading} />
         {children}
       </div>
       <Footer />

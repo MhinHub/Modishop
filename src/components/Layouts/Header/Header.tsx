@@ -37,7 +37,13 @@ export const sideNavLinks: [string, IconType][] = [
   ['/signin', FiUser],
 ];
 
-export const Header = ({ collections }: { collections: Collections }) => {
+export const Header = ({
+  collections,
+  isLoading,
+}: {
+  collections: Collections;
+  isLoading: boolean;
+}) => {
   const { t } = useTranslation('header');
 
   const { data: session } = useSession();
@@ -69,7 +75,7 @@ export const Header = ({ collections }: { collections: Collections }) => {
             {navLinks.map((item, index) => (
               <li
                 className={`font-medium text-neutral-700 transition-colors ${
-                  hoveredNavLink === item && 'bg-violet-100 text-violet-700'
+                  hoveredNavLink === item && ' bg-violet-100 text-violet-700'
                 }`}
                 key={index}
                 onMouseEnter={() => handleShowMenu(item)}
@@ -121,6 +127,7 @@ export const Header = ({ collections }: { collections: Collections }) => {
               collections={collections}
               onShowMenu={() => handleShowMenu(hoveredNavLink)}
               onCloseMenu={handleCloseMenu}
+              isLoading={isLoading}
             />
           )}
         </Transition>
