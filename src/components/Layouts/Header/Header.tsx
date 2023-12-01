@@ -12,6 +12,8 @@ import { MegaMenu } from './MegaMenu';
 import { Collections } from 'types';
 import { BottomNavigation } from 'components/Layouts/BottomNavigation/BottomNavigation';
 import { useSession, signOut } from 'next-auth/react';
+import { IoMdArrowDropright } from 'react-icons/io';
+import clsx from 'clsx';
 const AnnouncementBar = dynamic(() => import('./AnnouncementBar'), {
   ssr: false,
 });
@@ -74,13 +76,29 @@ export const Header = ({
           <ul className="ml-auto hidden h-full md:flex">
             {navLinks.map((item, index) => (
               <li
-                className={`font-medium text-neutral-700 transition-colors ${
+                className={`flex items-center font-medium text-neutral-700 transition-colors ${
                   hoveredNavLink === item && ' bg-violet-100 text-violet-700'
                 }`}
                 key={index}
                 onMouseEnter={() => handleShowMenu(item)}
                 onMouseLeave={handleCloseMenu}
               >
+                {item.collapsible && (
+                  <IoMdArrowDropright
+                    onClick={() => {
+                      hoveredNavLink === item
+                        ? handleCloseMenu()
+                        : handleShowMenu(item);
+                    }}
+                    className={clsx(
+                      '-mr-3 text-black/60 hover:bg-black/10',
+                      hoveredNavLink === item &&
+                        'rotate-90 rounded-full hover:text-violet-700',
+                      'transition-all duration-300 ease-in-out',
+                      'h-7 w-7'
+                    )}
+                  />
+                )}
                 <Link
                   href={item.href}
                   className="flex h-full items-center px-5"
