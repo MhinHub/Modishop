@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://raw.githubusercontent.com/MhinHub/modishop/main/public/ic-modishop.jpg" alt="logo" width="200" height="auto" />
+<img src="./public/icon-modishop.png" alt="logo" width="160" height="auto" />
   <h1>Modishop</h1>
   <p>An E-Commerce website build with T3 Stack</p>
 </div>
